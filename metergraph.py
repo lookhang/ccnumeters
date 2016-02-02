@@ -108,20 +108,22 @@ def makeGraphic(howmanydays,roomname,picname):
 	pl.close(1)
 
 
-def makeWarningGraphic():
+def makeWarningGraphic(type):
 
 	#print roomname+","+picname
 
-	fig = pl.figure(2,figsize=(10,5))
+	fig = pl.figure(2,figsize=(10,3))
+
+
+	#pl.sca(p1)
 
 	cx = sqlite3.connect("ccnumeter.db")
 
-	y = []#照明
-	z = []#空调
-	t = []#日期
+	y = []
+	t = []
 
 	mydate= datetime.date.today() - datetime.timedelta(days=1)
-	cu=cx.execute("select mvalue,roomname from meterlog where  mdate='"+str(mydate)+"' and type='light' order by CAST(mvalue AS float) desc")
+	cu=cx.execute("select mvalue,roomname from meterlog where  mdate='"+str(mydate)+"' and type='"+type+"' order by CAST(mvalue AS float) desc")
 	counter_y=0
 	for row in cu:
 		y.append(row[0])
@@ -132,18 +134,22 @@ def makeWarningGraphic():
 		y.append(0)
 	x = np.arange(0, counter_y, 1)
 
-	cu=cx.execute("select mvalue,roomname from meterlog where  mdate='"+str(mydate)+"' and type='air' order by CAST(mvalue AS float) desc")
-	for row in cu:
-		z.append(row[0])
+	if type=='air':
+		label=u'空调'
+		colorsyle='-bo'
+	else:
+		label=u'照明'
+		colorsyle='-ro'
+
+	pl.plot(x, y,colorsyle,label=label)
+
+
 
 	cu.close()
 	cx.close()
-	print z
 	#print y
 	#print np.max(x)
 	
-	pl.plot(x, z,'-bo',label=u'空调')
-	pl.plot(x, y,'-ro',label=u'照明')
 	
 	ax = pl.gca()
 
@@ -170,7 +176,7 @@ def makeWarningGraphic():
 	#重新设置新的label,用时间t设置
 	pl.xticks(locs, t, fontsize=8,fontproperties=zhfont)
 
-	pl.title(u'昨日 剩余电量 排行榜（注意及时充电）',fontproperties=zhfont)  
+	pl.title(u'昨日 '+label+u'剩余电量 排行榜（注意及时充电）',fontproperties=zhfont)  
 	#pl.xlabel(u'日期')  
 	pl.ylabel(u'剩余电量（单位：度）',fontproperties=zhfont) 
 
@@ -180,13 +186,13 @@ def makeWarningGraphic():
 	fig.autofmt_xdate()
 
 	#保存曲线为图片格式
-	#pl.savefig("./pics/warning.png")
-	pl.show()
+	pl.savefig("./pics/warning-"+type+".png")
+	#pl.show()
 	#print 'succ'
 	pl.close(2)
 
 f = open("roomnames.txt","r")
 for m in f:
 	makeGraphic(30,m.strip().decode('utf-8'),m[m.find('-')+1:].strip())
-
-makeWarningGraphic()
+makeWarningGraphic("light")
+makeWarningGraphic("air")
