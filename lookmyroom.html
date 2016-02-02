@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+  <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Expires" CONTENT="0"> 
+  <title>jQuery UI Tabs - Content via Ajax</title>
+  <link href="js/jquery-ui.min.css" rel="stylesheet">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script>
+  $(function() {
+    
+    $.ajax({
+            url: 'roomnames.txt',
+            dataType: 'text',
+            success: function(data) {
+                var lineArray = data.split('\n');
+                for(var i = 0; i<lineArray.length;i++){
+                  var line = lineArray[i];
+                $( "#tabs-ul" ).append("<li><a href=\"#"+line+"\">"+line+"</a></li>")
+                $("#tabs").append("<div align=\"center\" id=\""+line+"\"><img src=\"./pics/"+line.substring(line.lastIndexOf('-')+1)+".png?"+(new Date().getTime())+"\"></div>")
+                }
+                $( "#tabs-ul" ).append("<li><a href=\"#warning\">电量不足预警</a></li>")
+                $("#tabs").append("<div align=\"center\" id=\"warning\"><img src=\"./pics/warning-light.png?"+(new Date().getTime())+"\"><br/><img src=\"./pics/warning-air.png?"+(new Date().getTime())+"\"></div>")
+
+                $( "#tabs" ).tabs();
+            }
+    });          
+  });
+  </script>
+</head>
+<body>
+ 
+<div id="tabs">
+  <ul id="tabs-ul">
+  </ul>
+</div>
+</body>
+</html>
