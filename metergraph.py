@@ -176,7 +176,7 @@ def makeWarningGraphic(type):
 	#重新设置新的label,用时间t设置
 	pl.xticks(locs, t, fontsize=8,fontproperties=zhfont)
 
-	pl.title(u'昨日 '+label+u'剩余电量 排行榜（注意及时充电）',fontproperties=zhfont)  
+	pl.title(u'昨日 '+str(mydate)+' '+label+u'剩余电量 排行榜（注意及时充电）',fontproperties=zhfont)  
 	#pl.xlabel(u'日期')  
 	pl.ylabel(u'剩余电量（单位：度）',fontproperties=zhfont) 
 
