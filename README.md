@@ -9,7 +9,7 @@
 2. 对数据进行统计，并使用matplotlib画出曲线图
 
 ####解决问题：
-1. 请求的时候使用playground发送json
+1. 请求的时候使用payload发送json
 2. 使用正则表达式进行数据解析
 3. 操作sqlite数据库
 4. 使用matplotlib进行绘图
