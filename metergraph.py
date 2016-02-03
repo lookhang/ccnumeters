@@ -38,22 +38,23 @@ def makeGraphic(howmanydays,roomname,picname):
  		t.append(str(mydate))
 		#以下查询最新的10条记录
 		#cu=cx.execute("select * from (select mvalue,mdate from meterlog where roomname='"+roomname+"' and type='"+type+"' group by mdate order by mdate desc  limit 0,10) order by mdate")
-		cu=cx.execute("select mdate, CASE WHEN type='light' THEN mvalue ELSE 0 END mvalue from meterlog where roomname='"+roomname+"' and mdate='"+str(mydate)+"' and type='light'")
-		counter_z=0
-		for row in cu:
-			z.append(row[1])
-			counter_z=counter_z+1
-
-		if counter_z==0:
+		cu=cx.execute("select mdate, CASE WHEN type='light' THEN mvalue ELSE 0 END mvalue from meterlog where roomname='"+roomname+"' and mdate='"+str(mydate)+"' and type='light' group by mdate")
+		cu_result=cu.fetchall()
+		#print cu_result
+		if len(cu_result)!=0 :
+			#print 't'
+			for row in cu_result:
+				z.append(row[1])
+		else:
+			#print 'f'
 			z.append(0)
 
-		cu=cx.execute("select mdate, CASE WHEN type='air' THEN mvalue ELSE 0 END mvalue from meterlog where roomname='"+roomname+"' and mdate='"+str(mydate)+"' and type='air'")
-		counter_y=0
-		for row in cu:
-			y.append(row[1])
-			counter_y=counter_y+1
-
-		if counter_y==0:
+		cu=cx.execute("select mdate, CASE WHEN type='air' THEN mvalue ELSE 0 END mvalue from meterlog where roomname='"+roomname+"' and mdate='"+str(mydate)+"' and type='air' group by mdate")
+		cu_result=cu.fetchall()
+		if len(cu_result)!=0 :
+			for row in cu_result:
+				y.append(row[1])
+		else:
 			y.append(0)
 
 
@@ -61,6 +62,8 @@ def makeGraphic(howmanydays,roomname,picname):
 	cx.close()
 	#print z
 	#print y
+	#print x
+	#print t
 	#print np.max(x)
 	
 
