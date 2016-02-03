@@ -126,7 +126,7 @@ def makeWarningGraphic(type):
 	t = []
 
 	mydate= datetime.date.today() - datetime.timedelta(days=1)
-	cu=cx.execute("select mvalue,roomname from meterlog where  mdate='"+str(mydate)+"' and type='"+type+"' order by CAST(mvalue AS float) desc")
+	cu=cx.execute("select mvalue,roomname from meterlog where  mdate='"+str(mydate)+"' and type='"+type+"' group by roomname order by CAST(mvalue AS float) desc")
 	counter_y=0
 	for row in cu:
 		y.append(row[0])
