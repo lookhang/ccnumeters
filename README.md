@@ -1,6 +1,6 @@
 # CCNU宿舍电量统计
 ==========================
-##寒假学习Python，练手专用！
+###寒假学习Python，练手专用！
 
 
  
@@ -15,7 +15,8 @@
 4. 使用matplotlib进行绘图
 5. 中文乱码问题（编码、中文字体）
 6. 使用Jquery UI中的Tabs做前端展示
-7. 如果你的宿舍电量排倒数几名，记得提前充电费！
+7. Linux中使用Cron进行自动任务配置
+8. 如果你的宿舍电量排倒数几名，记得提前充电费！
 
 ####预览：
  ![image](https://github.com/lookhang/ccnumeters/raw/master/pics/6666.png)
