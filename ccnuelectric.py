@@ -1,11 +1,15 @@
 # -*- coding: UTF-8 -*- 
-import sys,requests, json,re,string,sqlite3,time
+import sys,requests, json,re,string,sqlite3,time,datetime
 #2016-01-31 18:05:05 by sixer
 #TEST DATA
 #南湖11-307：30901*Meter
 #国4-1520：23437*Meter
 reload(sys) 
 sys.setdefaultencoding('utf8') #设置编码，解决中文乱码
+
+def GetNowTime():
+
+    return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
 
 def getMeterData(room,unit,type,roomname):
 	url='此处为反推的数据接口地址，涉及到安全问题，不予公开！请见谅！'
@@ -41,6 +45,8 @@ def getMeterData(room,unit,type,roomname):
 	cu.close()
 	cx.close()
 
+print GetNowTime()
+
 f = open("meters_boy_girl.txt","r")
 for m in f:
 	meter_list=m.strip().split("：")
@@ -49,4 +55,4 @@ for m in f:
 		getMeterData(meter_list[1],meter_list[3],meter_list[2],meter_list[0])
 	except requests.exceptions.Timeout:
   		print "服务器没有响应，获取（"+meter_list[0]+"）电量超时！"
-	time.sleep(6)
+	time.sleep(30)

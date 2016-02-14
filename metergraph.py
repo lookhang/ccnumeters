@@ -6,7 +6,7 @@ import matplotlib.pyplot as pl,sqlite3,sys
 from matplotlib.ticker import MultipleLocator, FuncFormatter
 import numpy as np
 import matplotlib as mpl
-import datetime
+import datetime,time
 
 #mpl.rcParams['font.family'] = 'sans-serif'
 #mpl.rcParams['font.sans-serif'] = [u'Microsoft Yahei']
@@ -14,6 +14,9 @@ zhfont = mpl.font_manager.FontProperties(fname='font/Microsoft Yahei.ttf')
 
 MultipleLocator.MAXTICKS = 100000
 
+def GetNowTime():
+
+    return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
 
 
 def makeGraphic(howmanydays,roomname,picname):
@@ -201,6 +204,7 @@ def makeWarningGraphic(type):
 	#print 'succ'
 	pl.close(2)
 
+print GetNowTime()
 f = open("roomnames.txt","r")
 for m in f:
 	makeGraphic(30,m.strip().decode('utf-8'),m[m.find('-')+1:].strip())
