@@ -127,14 +127,18 @@ def makeWarningGraphic(type):
 
 	mydate= datetime.date.today() - datetime.timedelta(days=1)
 	cu=cx.execute("select mvalue,roomname from meterlog where  mdate='"+str(mydate)+"' and type='"+type+"' group by roomname order by CAST(mvalue AS float) desc")
-	counter_y=0
-	for row in cu:
-		y.append(row[0])
-		t.append(row[1])
-		counter_y=counter_y+1
+	cu_result=cu.fetchall()
 
-	if counter_y==0:
+	counter_y=len(cu_result)
+	if len(cu_result)!=0 :
+		for row in cu_result:
+			y.append(row[0])
+			t.append(row[1])
+	else:
 		y.append(0)
+		t.append(u'暂无数据')
+		counter_y=1
+	
 	x = np.arange(0, counter_y, 1)
 
 	if type=='air':
@@ -144,13 +148,16 @@ def makeWarningGraphic(type):
 		label=u'照明'
 		colorsyle='-ro'
 
+	print x
+	print y
+
 	pl.plot(x, y,colorsyle,label=label)
 
 
 
 	cu.close()
 	cx.close()
-	#print y
+	
 	#print np.max(x)
 	
 	
