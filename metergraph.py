@@ -23,7 +23,7 @@ def makeGraphic(howmanydays,roomname,picname):
 
 	#print roomname+","+picname
 
-	fig = pl.figure(1,figsize=(10,5))
+	fig = pl.figure(1,figsize=(11,5))
 
 	cx = sqlite3.connect("ccnumeter.db")
 
@@ -74,10 +74,10 @@ def makeGraphic(howmanydays,roomname,picname):
 	pl.plot(x, y,'-bo',label=roomname+u'空调')
 
 	for xz in zip(x,z):
-    		pl.annotate(xz[1], xy=xz, xytext=(2,5),fontsize=5,textcoords = 'offset points')
+    		pl.annotate(xz[1], xy=xz, xytext=(2,5),fontsize=6,fontproperties=zhfont,textcoords = 'offset points')
 
 	for xy in zip(x,y):
-    		pl.annotate(xy[1], xy=xy, xytext=(2,5),fontsize=5,textcoords = 'offset points')
+    		pl.annotate(xy[1], xy=xy, xytext=(2,5),fontsize=6,fontproperties=zhfont,textcoords = 'offset points')
 	
 	ax = pl.gca()
 
@@ -103,10 +103,12 @@ def makeGraphic(howmanydays,roomname,picname):
 	#print locs
 	#重新设置新的label,用时间t设置
 	pl.xticks(locs, t, fontsize=8)
+	#设置Y轴字体
+	pl.yticks(fontsize=9,fontproperties=zhfont)
 
-	pl.title(u'华中师范大学-教育信息技术学院-2015级研究生宿舍剩余电量',fontproperties=zhfont)  
+	pl.title(u'华中师大-信技学院-2015级研究生宿舍剩余电量',fontsize=12,fontproperties=zhfont)  
 	#pl.xlabel(u'日期')  
-	pl.ylabel(u'剩余电量（单位：度）',fontproperties=zhfont) 
+	pl.ylabel(u'剩余电量（单位：度）',fontsize=8,fontproperties=zhfont) 
 
 	pl.legend(prop=zhfont)
 
@@ -124,7 +126,7 @@ def makeWarningGraphic(type):
 
 	#print roomname+","+picname
 
-	fig = pl.figure(2,figsize=(10,3))
+	fig = pl.figure(2,figsize=(11,4))
 
 
 	#pl.sca(p1)
@@ -163,7 +165,7 @@ def makeWarningGraphic(type):
 	pl.plot(x, y,colorsyle,label=label)
 
 	for xy in zip(x,y):
-    		pl.annotate(xy[1], xy=xy, xytext=(2,5),fontsize=7,textcoords = 'offset points')
+    		pl.annotate(xy[1], xy=xy, xytext=(2,5),fontsize=7,fontproperties=zhfont,textcoords = 'offset points')
     		#print xy
 
 	cu.close()
@@ -197,12 +199,13 @@ def makeWarningGraphic(type):
 	#重新设置新的label,用时间t设置
 	pl.xticks(locs, t, fontsize=8,fontproperties=zhfont)
 
-	#pl.yticks(y, [1,2])
+	#设置Y轴字体
+	pl.yticks(fontsize=9,fontproperties=zhfont)
 
 
-	pl.title(u'昨日 '+str(mydate)+' '+label+u'剩余电量 排行榜（注意及时充电）',fontproperties=zhfont)  
+	pl.title(u'昨日 '+str(mydate)+' '+label+u'剩余电量 排行榜（注意及时充电）',fontsize=12,fontproperties=zhfont)  
 	#pl.xlabel(u'日期')  
-	pl.ylabel(u'剩余电量（单位：度）',fontproperties=zhfont) 
+	pl.ylabel(u'剩余电量（单位：度）',fontsize=8,fontproperties=zhfont) 
 
 	pl.legend(prop=zhfont)
 
