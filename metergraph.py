@@ -72,6 +72,12 @@ def makeGraphic(howmanydays,roomname,picname):
 
 	pl.plot(x, z,'-ro', label=roomname+u'照明')
 	pl.plot(x, y,'-bo',label=roomname+u'空调')
+
+	for xz in zip(x,z):
+    		pl.annotate(xz[1], xy=xz, xytext=(2,5),fontsize=5,textcoords = 'offset points')
+
+	for xy in zip(x,y):
+    		pl.annotate(xy[1], xy=xy, xytext=(2,5),fontsize=5,textcoords = 'offset points')
 	
 	ax = pl.gca()
 
@@ -156,7 +162,9 @@ def makeWarningGraphic(type):
 
 	pl.plot(x, y,colorsyle,label=label)
 
-
+	for xy in zip(x,y):
+    		pl.annotate(xy[1], xy=xy, xytext=(2,5),fontsize=7,textcoords = 'offset points')
+    		#print xy
 
 	cu.close()
 	cx.close()
@@ -188,6 +196,9 @@ def makeWarningGraphic(type):
 	#print locs
 	#重新设置新的label,用时间t设置
 	pl.xticks(locs, t, fontsize=8,fontproperties=zhfont)
+
+	#pl.yticks(y, [1,2])
+
 
 	pl.title(u'昨日 '+str(mydate)+' '+label+u'剩余电量 排行榜（注意及时充电）',fontproperties=zhfont)  
 	#pl.xlabel(u'日期')  
