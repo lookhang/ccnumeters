@@ -82,12 +82,12 @@ def makeGraphic(howmanydays,roomname,picname):
 	ax = pl.gca()
 
 	ax.xaxis.set_major_locator(MultipleLocator(1))
-	ax.yaxis.set_major_locator( MultipleLocator(25) )
+	ax.yaxis.set_major_locator( MultipleLocator(40) )
 
 	
 
 	# 设置两个坐标轴的范围
-	pl.ylim(0,250)
+	pl.ylim(0,400)
 	pl.xlim(1, np.max(x)-1)
 
 
@@ -177,12 +177,12 @@ def makeWarningGraphic(type):
 	ax = pl.gca()
 
 	ax.xaxis.set_major_locator(MultipleLocator(1))
-	ax.yaxis.set_major_locator( MultipleLocator(25) )
+	ax.yaxis.set_major_locator( MultipleLocator(40) )
 
 	
 
 	# 设置两个坐标轴的范围
-	pl.ylim(0,250)
+	pl.ylim(0,400)
 	pl.xlim(1, np.max(x)-1)
 
 
